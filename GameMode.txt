@@ -1,0 +1,67 @@
+//add-ons to load
+ADDON Brick_18Degree
+ADDON Brick_1RandomPack
+ADDON Brick_Arch
+ADDON Brick_ExtraRamps
+ADDON Brick_InvertedCorners
+ADDON Brick_Large_Cubes
+ADDON Brick_MoreRounds
+ADDON Brick_Pole
+ADDON Brick_Print_Icons
+ADDON Brick_Round_Corners
+ADDON Brick_V15
+ADDON Brick_Wedge
+ADDON Brick_Window
+ADDON Brick_Windows
+ADDON Emote_Alarm
+ADDON Weapon_Sword
+ADDON Weapon_Gun
+ADDON Emote_Critical
+ADDON Light_Ambient
+ADDON Light_Basic
+ADDON Particle_Basic
+ADDON Particle_Candle
+ADDON Particle_CasualBuild
+ADDON Gamemode_TeamDeathmatch
+ADDON Gamemode_CaptureTheFlag
+ADDON Server_BloodAndGore
+ADDON Weapon_ElementalSpells
+ADDON Weapon_Package_Tier1
+ADDON Weapon_Package_Tier2
+ADDON Weapon_Melee_Extended
+ADDON Script_TechEval_IV
+ADDON Tool_SwissArmyGun
+ADDON GameMode_StalkerDM
+
+//music
+
+//server settings
+
+//environment
+$EnvGuiServer::SimpleMode 1
+$EnvGuiServer::SkyFile Add-Ons/Sky_Heat2/heat2.dml
+$EnvGuiServer::WaterFile NONE
+$EnvGuiServer::GroundFile Add-Ons/Ground_Plate/plate.ground
+
+//minigame rules
+$MiniGame::Enabled 1
+$MiniGame::BrickDamage 0
+$MiniGame::BrickRespawnTime 30
+$Minigame::ColorID 0
+$MiniGame::EnableBuilding 0
+$MiniGame::EnablePainting 0
+$MiniGame::EnableWand 0
+$MiniGame::FallingDamage 1
+$MiniGame::PlayerDataBlock Standard Player
+$MiniGame::PlayersUseOwnBricks 0
+$MiniGame::Points::BreakBrick 0
+$MiniGame::Points::Die 0
+$MiniGame::Points::KillPlayer 1
+$MiniGame::Points::KillSelf -1
+$MiniGame::Points::PlantBrick 0
+$MiniGame::RespawnTime 3
+$MiniGame::SelfDamage 1
+$MiniGame::Title Stalkers vs Humans
+$MiniGame::UseAllPlayersBricks 1
+$MiniGame::UseSpawnBricks 1
+$MiniGame::WeaponDamage 1

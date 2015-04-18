@@ -1,0 +1,18 @@
+Title: Stalkers vs Humans
+Author: The Craftsmen Clan
+
+Contributors:
+	Amadé (Programming, original knife models, shadow knife model, proximity shocker model, icons)
+	Spock (Hosting, support, ideas)
+	Wizzeh (Hosting, support, ideas)
+	Blastdown (ACRA, proximity shocker, and flare models)
+	Bushido (Stalker, momentum, bloodlust, and serrated knife models; stimpak, taser, flamethrower, and shield models; some particle effects and sounds)
+	Tingalz (Repulsor and poop nife models)
+	Crysist (Original serrated knife model)
+
+Thanks to / Additional Credits:
+	Chrono (InventorySlotsAdjustment support script)
+	Devastator (Modified form of LightTinyEmitter used for flashlight)
+	Space Guy (Support_AltDatablock support script)
+	Kalphiter (For his dedicated hosting service)
+	All of the players who participated in beta testing.
