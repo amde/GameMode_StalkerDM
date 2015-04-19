@@ -850,16 +850,13 @@ function AbyssTick(%this, %remain)
 	InitContainerRadiusSearch(%this.getPosition(), GlobalStorage.AbyssRadius, $Typemasks::PlayerObjectType);
 	while(%hit = containerSearchNext())
 	{
-		if(minigameCanDamage(%this.caster, %hit) == 1 && %this.caster != %hit)
+		if(minigameCanDamage(%this.caster, %hit) && %this.caster != %hit)
 		{
 			if(%hit.AbyssCursed++ > GlobalStorage.AbyssBlindTicks)
 			{
-				%hit.mountImage(DarkBlindPlayerImage, 1);
+				%hit.blind(2000);
 			}
-			if(%hit.getDatablock() != nameToID(PlayerHumanSnaredArmor))
-			{
-				%hit.pushDatablock(PlayerHumanSnaredArmor);
-			}
+			%hit.slow(0.5, 2000);
 			cancel(%hit.AbyssEnd);
 			%hit.AbyssEnd = %hit.schedule(GlobalStorage.AbyssFalloffTime, AbyssTickDecrement);
 			if(isObject(%client = %hit.client) && %client.getClassName() $= "GameConnection" && !%hit.stunned)
@@ -1068,7 +1065,7 @@ function PsychosisTick(%this, %remain)
 	InitContainerRadiusSearch(%this.getPosition(), GlobalStorage.PsychosisRadius, $Typemasks::PlayerObjectType);
 	while(%hit = containerSearchNext())
 	{
-		if(minigameCanDamage(%this.caster, %hit) == 1 && %this.caster != %hit && !%hit.dummy)
+		if(minigameCanDamage(%this.caster, %hit) && %this.caster != %hit && !%hit.dummy)
 		{
 			%hit.neurotic = true;
 			%pos = %hit.getPosition();

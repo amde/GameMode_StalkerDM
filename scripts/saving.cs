@@ -64,9 +64,9 @@ if(!isFile($StalkerDM::SaveLocation @ "GlobalStorage.cs"))
 		ACRAefficiency = 0.3;
 		ACRAradius = 16;
 		ACRAtickamt = 7.5;
-		ARammo = 200;
-		ARregen = 40;
-		ARsnipeDamage = 15;
+		ARammo = 100;
+		ARregen = 75;
+		ARsnipeDamage = 25;
 		ARsprayDamage = 8;
 		BlindCD = 15000;
 		BlindEnergy = 30;
@@ -100,7 +100,7 @@ if(!isFile($StalkerDM::SaveLocation @ "GlobalStorage.cs"))
 		LeechEfficiency = 0.5;
 		LeechRadius = 16;
 		LustEfficiency = 0.1; //!!!
-		LustLossPercent = 0.25; //!!!
+		LustLossPercent = 0; //!!!
 		MagicRange = 64;
 		MagicSection = 15;
 		MomentumKnifeBackstabs = false;
@@ -147,9 +147,9 @@ if(!isFile($StalkerDM::SaveLocation @ "GlobalStorage.cs"))
 		ShieldKnockback = 5;
 		ShieldRange = 3;
 		ShieldSection = 45;
-		ShotgunAmmo = 36;
+		ShotgunAmmo = 40;
 		ShotgunDamage = 7;
-		ShotgunRegen = 8;
+		ShotgunRegen = 15;
 		ShotgunShellcount = 7;
 		SledgeDamage = 20;
 		SledgeDuration = 2000;

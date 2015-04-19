@@ -365,7 +365,7 @@ function ShadowstepImage::onFire(%this, %obj, %slot)
 				}
 				return;
 			}
-			%obj.mountImage(%obj.tool[0], 0);
+			%obj.mountImage(%obj.tool[0].image, 0);
 			%obj.spawnExplosion(ParalysisProjectile, 2);
 			%obj.setEnergyLevel(mClamp(%obj.getEnergyLevel() - GlobalStorage.SSEnergy, 0, 100));
 			%obj.CDshadowstep = getSimTime() + GlobalStorage.SSCD;

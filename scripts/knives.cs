@@ -795,13 +795,17 @@ function StalkerBloodlustKnifeImage::onFire(%this, %obj, %slot)
 			{
 				%col.client.play2d(critRecieveSound);
 			}
-			%col.damage(%obj, %pos, (GlobalStorage.KnifeFacestab + (GlobalStorage.LustEfficiency * %obj.BLKdamage)) * GlobalStorage.StalkerCritScale, $DamageType::StalkerBloodlustKnifeBackstab);
-			%obj.BLKdamage+= GlobalStorage.KnifeFacestab * GlobalStorage.StalkerCritScale + (GlobalStorage.LustEfficiency * %obj.BLKdamage);
+			%amt = (GlobalStorage.KnifeFacestab + (GlobalStorage.LustEfficiency * %obj.BLKdamage)) * GlobalStorage.StalkerCritScale;
+			%col.damage(%obj, %pos, %amt, $DamageType::StalkerBloodlustKnifeBackstab);
+			%obj.BLKdamage+= %amt;
+			schedule(30000, 0, eval, %obj @ ".BLKdamage-=" @ %amt @ ";");
 		}
 		else
 		{
-			%col.damage(%obj, %pos, GlobalStorage.KnifeFacestab + (GlobalStorage.LustEfficiency * %obj.BLKdamage), $DamageType::StalkerBloodlustKnife);
-			%obj.BLKdamage+= GlobalStorage.KnifeFacestab + (GlobalStorage.LustEfficiency * %obj.BLKdamage);
+			%amt = GlobalStorage.KnifeFacestab + (GlobalStorage.LustEfficiency * %obj.BLKdamage);
+			%col.damage(%obj, %pos, %amt, $DamageType::StalkerBloodlustKnife);
+			%obj.BLKdamage+= %amt;
+			schedule(30000, 0, eval, %obj @ ".BLKdamage-=" @ %amt @ ";");
 		}
 		if((GlobalStorage.KnifeFacestab + (%obj.BLKdamage * GlobalStorage.LustEfficiency)) >= 100)
 		{

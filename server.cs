@@ -156,7 +156,7 @@ exec($StalkerDM::Path @ "/scripts/knives.cs");
 exec($StalkerDM::Path @ "/scripts/magics.cs");
 exec($StalkerDM::Path @ "/scripts/melee.cs");
 exec($StalkerDM::Path @ "/scripts/misc.cs");
-//exec($StalkerDM::Path @ "/scripts/notice.cs");
+exec($StalkerDM::Path @ "/scripts/notice.cs");
 exec($StalkerDM::Path @ "/scripts/shop.cs");
 exec($StalkerDM::Path @ "/scripts/sort.cs");
 exec($StalkerDM::Path @ "/scripts/voting.cs");

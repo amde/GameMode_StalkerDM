@@ -883,7 +883,7 @@ package StalkerDM
 					{
 						%obj.combatEnd = %time + GlobalStorage.CombatLength;
 					}
-					if(%obj.getDatablock() == $PlayerStalkerBloodleechArmor && minigameCanDamage(%this, %obj) == 1 && %this != %obj && %type != $DamageType::FireM && %amt > 0)
+					if(%obj.getDatablock() == $PlayerStalkerBloodleechArmor && minigameCanDamage(%this, %obj)&& %this != %obj && %type != $DamageType::FireM && %amt > 0)
 					{
 						if(%obj.getDamageLevel() > 0)
 						{
@@ -920,7 +920,7 @@ package StalkerDM
 						}
 						schedule(3000, 0, eval, %obj @ ".SHLFdamage-= " @ %amt @ ";");
 					}
-					if($DamageType_Array[%type] $= "PumpShotgun")
+					else if($DamageType_Array[%type] $= "PumpShotgun")
 					{
 						if((%obj.PSSdamage+= GlobalStorage.ShotgunDamage) >= (GlobalStorage.ShotgunDamage * GlobalStorage.ShotgunShellcount))
 						{
@@ -970,7 +970,7 @@ package StalkerDM
 		}
 		if(%this.getDamagePercent() >= 1)
 		{
-			if(isObject(%obj.client)
+			if(isObject(%obj.client))
 			{
 				%obj.client.incScore(1);
 			}
@@ -1008,21 +1008,21 @@ package StalkerDM
 				{
 					%obj.client.unlockAchievement("Master of Fury");
 				}
-				if(%obj.client.humankills++ >= 10)
+				if(%obj.client.humankills++ == 100)
 				{
-					%obj.client.unlockAchievement("10 Human Kills");
+					%obj.client.unlockAchievement("100 Human Kills");
 				}
-				else if(%obj.client.humankills >= 25)
+				else if(%obj.client.humankills == 25)
 				{
 					%obj.client.unlockAchievement("25 Human Kills");
 				}
-				else if(%obj.client.humankills >= 50)
+				else if(%obj.client.humankills == 50)
 				{
 					%obj.client.unlockAchievement("50 Human Kills");
 				}
-				else if(%obj.client.humankills >= 100)
+				else if(%obj.client.humankills == 10)
 				{
-					%obj.client.unlockAchievement("100 Human Kills");
+					%obj.client.unlockAchievement("10 Human Kills");
 				}
 				if(%obj.client.minigame.numMembers >= 6)
 				{
@@ -1047,21 +1047,21 @@ package StalkerDM
 			}
 			else if(%obj.client.tdmTeam == 1)
 			{
-				if(%obj.client.stalkerkills++ >= 10)
+				if(%obj.client.stalkerkills++ == 100)
 				{
-					%obj.client.unlockAchievement("10 Stalker Kills");
+					%obj.client.unlockAchievement("100 Stalker Kills");
 				}
-				if(%obj.client.stalkerkills >= 25)
+				else if(%obj.client.stalkerkills == 25)
 				{
 					%obj.client.unlockAchievement("25 Stalker Kills");
 				}
-				if(%obj.client.stalkerkills >= 50)
+				else if(%obj.client.stalkerkills == 50)
 				{
 					%obj.client.unlockAchievement("50 Stalker Kills");
 				}
-				if(%obj.client.stalkerkills >= 100)
+				else if(%obj.client.stalkerkills == 10)
 				{
-					%obj.client.unlockAchievement("100 Stalker Kills");
+					%obj.client.unlockAchievement("10 Stalker Kills");
 				}
 				if(%obj.client.minigame.numMembers >= 6)
 				{
@@ -1266,14 +1266,20 @@ package StalkerDM
 	function GameConnection::AutoAdminCheck(%client)
 	{
 		%client.file = $GuestAccount;
-		//schedule(100, 0, messageClient, %client, '', "<color:00ff00>Please register a SVH account (\c3/register \c0Username\c2) or log in (\c3/login \c0Username\c2).");
-		if(GlobalStorage.nameTaken[%client.bl_ID @ "_" @ %user])
+		if(isAlphanumeric(%client.name))
 		{
-			schedule(100, 0, serverCmdLogin, %client, %client.name);
+			if(GlobalStorage.nameTaken[%client.bl_ID @ "_" @ %user])
+			{
+				schedule(100, 0, serverCmdLogin, %client, %client.name);
+			}
+			else
+			{
+				schedule(100, 0, serverCmdRegister, %client, %client.name);
+			}
 		}
 		else
 		{
-			schedule(100, 0, serverCmdRegister, %client, %client.name);
+			schedule(100, 0, messageClient, %client, '', "<color:00ff00>Please register a SVH account (\c3/register \c0Username\c2) or log in (\c3/login \c0Username\c2).");
 		}
 		return parent::AutoAdminCheck(%client);
 	}
@@ -1510,17 +1516,17 @@ package StalkerDM
 	function minigameCanDamage(%a, %b)
 	{
 		%p = parent::minigameCanDamage(%a, %b);
+		%a = getTeamFromObject(%a);
+		%b = getTeamFromObject(%b);
 		if(%a.dummy || %b.dummy)
 		{
-			if(%a.client.tdmTeam == 1 || %b.client.tdmTeam == 1)
+			if(%a == 1 || %b == 1)
 			{
 				return 1;
 			}
 		}
 		else
 		{
-			%a = getTeamFromObject(%a);
-			%b = getTeamFromObject(%b);
 			if(%p)
 			{
 				%p = %a != %b;
@@ -1735,11 +1741,17 @@ package StalkerDM
 	// #2.26
 	function Observer::onTrigger(%this, %obj, %slot, %val)
 	{
-		if(%obj.client.player.stunned && %obj.client.player.getDamageLevel() < 1)
+		if(%obj.getControllingClient().player.stunned)
 		{
 			return;
 		}
 		else return parent::onTrigger(%this, %obj, %slot, %val);
+	}
+
+	// #2.27
+	function Player::setDamageFlash(%this, %amt)
+	{
+		parent::setDamageFlash(%this, mClampF(%amt, 0, 0.3));
 	}
 };
 activatePackage(StalkerDM);

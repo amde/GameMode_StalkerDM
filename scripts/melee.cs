@@ -388,7 +388,6 @@ function ShieldImage::onFire(%this, %obj, %slot)
 	if(%col.getType() & $Typemasks::PlayerObjectType && minigameCanDamage(%obj, %col) == 1)
 	{
 		%col.damage(%obj, %pos, GlobalStorage.ShieldDamage, $DamageType::Shield);
-		//%col.setVelocity(vectorScale(vectorAdd(%obj.getForwardVector(), "0 0 1"), GlobalStorage.ShieldKnockback));
 	}
 }
 
